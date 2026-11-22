@@ -8,6 +8,8 @@ function App() {
   const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState("all");
   const [visibleCount, setVisibleCount] = useState(4);
+  // הדירוג שלי לפי id של סרט — כך הוא נשאר על הסרט הנכון גם אחרי סינון
+  const [myRatings, setMyRatings] = useState({});
 
   const topRated = movies.filter(movie => movie.rating >= 8.7);
 
@@ -29,6 +31,12 @@ function App() {
     setOnlyAvailable(!onlyAvailable);
   }
 
+  function rateMovie(id, stars) {
+    // לחיצה שוב על אותו כוכב — מאפסת
+    const newRating = myRatings[id] === stars ? 0 : stars;
+    setMyRatings({ ...myRatings, [id]: newRating });
+  }
+
   function showMore() {
     setVisibleCount(visibleCount + 4);
   }
@@ -42,7 +50,12 @@ function App() {
           <p>סרטים שכדאי לראות — הישנים הטובים והחדשים.</p>
         </section>
 
-        <MovieList title="הכי מדורגים" movies={topRated} />
+        <MovieList
+          title="הכי מדורגים"
+          movies={topRated}
+          myRatings={myRatings}
+          onRate={rateMovie}
+        />
 
         <div className="toolbar">
           <button
@@ -74,6 +87,8 @@ function App() {
         <MovieList
           title={`כל הסרטים (${shownMovies.length})`}
           movies={visibleMovies}
+          myRatings={myRatings}
+          onRate={rateMovie}
         />
 
         {visibleCount < shownMovies.length && (

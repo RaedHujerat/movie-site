@@ -98,3 +98,23 @@
 .movie-card__like:hover {
   background: var(--surface);
 }
+
+/* הדירוג שלי — חמישה כוכבים */
+.movie-card__my-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.movie-card__star {
+  padding: 0 1px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--gold);
+  cursor: pointer;
+}

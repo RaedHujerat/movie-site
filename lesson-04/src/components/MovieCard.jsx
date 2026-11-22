@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./MovieCard.css";
 
-function MovieCard({ title, year, duration, genre, rating, poster, available }) {
+function MovieCard({ title, year, duration, genre, rating, poster, available, myRating, onRate }) {
   const [liked, setLiked] = useState(false);
 
   function handleLike() {
@@ -25,6 +25,19 @@ function MovieCard({ title, year, duration, genre, rating, poster, available }) 
         <div className="movie-card__footer">
           <span className="movie-card__genre">{genre}</span>
           <span className="movie-card__rating">★ {rating}</span>
+        </div>
+        <div className="movie-card__my-rating">
+          <span>הדירוג שלי:</span>
+          {[1, 2, 3, 4, 5].map(star => (
+            <button
+              key={star}
+              className="movie-card__star"
+              onClick={() => onRate(star)}
+              aria-label={`${star} כוכבים`}
+            >
+              {star <= myRating ? "★" : "☆"}
+            </button>
+          ))}
         </div>
       </div>
     </article>

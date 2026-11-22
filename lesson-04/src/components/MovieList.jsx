@@ -1,7 +1,7 @@
 import MovieCard from "./MovieCard.jsx";
 import "./MovieList.css";
 
-function MovieList({ title, movies }) {
+function MovieList({ title, movies, myRatings, onRate }) {
   return (
     <section className="movie-list">
       <h2 className="movie-list__title">{title}</h2>
@@ -19,6 +19,8 @@ function MovieList({ title, movies }) {
             rating={movie.rating}
             poster={movie.poster}
             available={movie.available}
+            myRating={myRatings[movie.id] || 0}
+            onRate={stars => onRate(movie.id, stars)}
           />
         ))}
       </div>
