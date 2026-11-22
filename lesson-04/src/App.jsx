@@ -37,6 +37,11 @@ function App() {
     setMyRatings({ ...myRatings, [id]: newRating });
   }
 
+  function selectGenre(genre) {
+    setSelectedGenre(genre);
+    setVisibleCount(4);
+  }
+
   function showMore() {
     setVisibleCount(visibleCount + 4);
   }
@@ -69,7 +74,7 @@ function App() {
 
           <button
             className={selectedGenre === "all" ? "btn btn--active" : "btn"}
-            onClick={() => setSelectedGenre("all")}
+            onClick={() => selectGenre("all")}
           >
             הכל
           </button>
@@ -77,7 +82,7 @@ function App() {
             <button
               key={genre}
               className={selectedGenre === genre ? "btn btn--active" : "btn"}
-              onClick={() => setSelectedGenre(genre)}
+              onClick={() => selectGenre(genre)}
             >
               {genre}
             </button>
